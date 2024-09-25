@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skandacor Dynamic Inquiry Form</title>
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        /* Section Headings */
+        .form-section h3 {
+            color: #2980b9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+            }
+        }
+
+        /* Hide sections initially */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Skandacor Inquiry Form</h1>
+        
+        <form id="inquiryForm">
+            <!-- Base Questions -->
+            <div class="form-section">
+                <label for="inquiryType">Select Inquiry Type:</label>
+                <select id="inquiryType" name="inquiryType" required>
+                    <option value="">--Select--</option>
+                    <option value="technicalSupport">Technical Support</option>
+                    <option value="productInquiry">Product Inquiry</option>
+                    <option value="equipmentRental">Equipment Rental</option>
+                </select>
+            </div>
+
+            <div class="form-section">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-section">
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-section">
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+
+            <!-- Conditional Section for Technical Support -->
+            <div id="technicalSupportSection" class="hidden form-section">
+                <h3>Technical Support Details</h3>
+                <label for="machineModel">Machine Make/Model:</label>
+                <input type="text" id="machineModel" name="machineModel"><br><br>
+
+                <label for="serialNumber">Serial Number:</label>
+                <input type="text" id="serialNumber" name="serialNumber"><br><br>
+
+                <label for="issueDescription">Issue Description:</label>
+                <textarea id="issueDescription" name="issueDescription"></textarea>
+            </div>
+
+            <!-- Conditional Section for Product Inquiry -->
+            <div id="productInquirySection" class="hidden form-section">
+                <h3>Product Inquiry Details</h3>
+                <label for="productName">Product Name/SKU:</label>
+                <input type="text" id="productName" name="productName"><br><br>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity"><br><br>
+
+                <label for="deliveryDate">Preferred Delivery Date:</label>
+                <input type="date" id="deliveryDate" name="deliveryDate">
+            </div>
+
+            <!-- Conditional Section for Equipment Rental -->
+            <div id="equipmentRentalSection" class="hidden form-section">
+                <h3>Equipment Rental Details</h3>
+                <label for="equipmentType">Equipment Type:</label>
+                <input type="text" id="equipmentType" name="equipmentType"><br><br>
+
+                <label for="rentalDuration">Rental Duration (days):</label>
+                <input type="number" id="rentalDuration" name="rentalDuration"><br><br>
+
+                <label for="startDate">Preferred Start Date:</label>
+                <input type="date" id="startDate" name="startDate">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-section">
+                <button type="submit">Submit Inquiry</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('inquiryType').addEventListener('change', function() {
+            const selectedType = this.value;
+            // Hide all sections first
+            document.getElementById('technicalSupportSection').classList.add('hidden');
+            document.getElementById('productInquirySection').classList.add('hidden');
+            document.getElementById('equipmentRentalSection').classList.add('hidden');
+
+            // Show the correct section based on selection
+            if (selectedType === 'technicalSupport') {
+                document.getElementById('technicalSupportSection').classList.remove('hidden');
+            } else if (selectedType === 'productInquiry') {
+                document.getElementById('productInquirySection').classList.remove('hidden');
+            } else if (selectedType === 'equipmentRental') {
+                document.getElementById('equipmentRentalSection').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
